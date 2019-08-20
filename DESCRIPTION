@@ -1,0 +1,33 @@
+Package: simcases
+Title: Perform Simulation Studies Over Multiple Cases/Scenarios
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Audrey", "Beliveau", , "audrey.beliveau@uwaterloo.ca", c("aut", "cre")),
+    person("Joe", "Thorley", , "joe@poissonconsulting.ca", c("ctb"), comment = c(ORCID = "0000-0002-7683-4592"))
+    )
+Description: Perform Simulation Studies Over Multiple Cases/Scenarios.
+License: GPL-3
+Depends: R (>= 3.6), nlist
+Imports: 
+  err,
+  checkr,
+  rjags,
+  mcmcderive,
+  sims,
+  batchr,
+  magrittr,
+  term,
+  utils
+Suggests: 
+    covr,
+    testthat
+Remotes:
+   poissonconsulting/nlist,
+   poissonconsulting/sims,
+   poissonconsulting/batchr
+URL: https://github.com/audrey-b/simcases
+BugReports: https://github.com/audrey-b/simcases/issues
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Language: en-US

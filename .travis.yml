@@ -1,0 +1,22 @@
+language: R
+cache: packages
+
+r:
+  - release
+  - devel
+
+r_packages:
+  - covr
+
+apt_packages:
+  - r-cran-rjags
+
+after_success:
+  - Rscript -e 'covr::codecov()'
+
+notifications:
+  email:
+    recipients:
+      - audrey.beliveau@uwaterloo.ca
+    on_success: change
+    on_failure: always
