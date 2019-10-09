@@ -2,7 +2,6 @@
 
 export(function_template)
 export(simcases_simulate)
-export(smc_set_case)
 import(batchr)
 import(chk)
 import(magrittr)

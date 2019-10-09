@@ -42,7 +42,7 @@ remotes::install_github("audrey-b/simcases")
 ## Demonstration
 ```{r}
 library(simcases)
-code = "Y ~ dnorm(mu, 1/sigma^2)
+lik = "Y ~ dnorm(mu, 1/sigma^2)
         Z ~ dpois(lambda)"
 const = nlist(mu=0)
 params1 = nlist(sigma=1, lambda=1)
@@ -50,28 +50,11 @@ params2 = nlist(sigma=2, lambda=1)
 monitor.Y = "Y"
 monitor.all = ".*"
 
-sims1 = smc_set_case(sims::sims_simulate,
-                     code = code,
-                     constants = const,
-                     parameters = params1,
-                     monitor = monitor.Y)
-sims2 = smc_set_case(sims::sims_simulate,
-                     code = code,
-                     constants = const,
-                     parameters = params1,
-                     monitor = monitor.all)
-sims3 = smc_set_case(sims::sims_simulate,
-                     code = code,
-                     constants = const,
-                     parameters = params2,
-                     monitor = monitor.Y)
-sims4 = smc_set_case(sims::sims_simulate,
-                     code = code,
-                     constants = const,
-                     parameters = params2,
-                     monitor = monitor.all)
-
-simcases_simulate(cases = list(sims1, sims2, sims3, sims4))
+simcases_simulate("code constants parameters monitor",
+                  "lik  const     params1    monitor.Y
+                   lik  const     params2    monitor.Y
+                   lik  const     params1    monitor.all
+                   lik  const     params2    monitor.all")
 ```
 
 ## Contribution

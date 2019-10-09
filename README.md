@@ -45,7 +45,7 @@ remotes::install_github("audrey-b/simcases")
 ``` r
 library(simcases)
 #> Loading required package: nlist
-code = "Y ~ dnorm(mu, 1/sigma^2)
+lik = "Y ~ dnorm(mu, 1/sigma^2)
         Z ~ dpois(lambda)"
 const = nlist(mu=0)
 params1 = nlist(sigma=1, lambda=1)
@@ -53,31 +53,14 @@ params2 = nlist(sigma=2, lambda=1)
 monitor.Y = "Y"
 monitor.all = ".*"
 
-sims1 = smc_set_case(sims::sims_simulate,
-                     code = code,
-                     constants = const,
-                     parameters = params1,
-                     monitor = monitor.Y)
-sims2 = smc_set_case(sims::sims_simulate,
-                     code = code,
-                     constants = const,
-                     parameters = params1,
-                     monitor = monitor.all)
-sims3 = smc_set_case(sims::sims_simulate,
-                     code = code,
-                     constants = const,
-                     parameters = params2,
-                     monitor = monitor.Y)
-sims4 = smc_set_case(sims::sims_simulate,
-                     code = code,
-                     constants = const,
-                     parameters = params2,
-                     monitor = monitor.all)
-
-simcases_simulate(cases = list(sims1, sims2, sims3, sims4))
+simcases_simulate("code constants parameters monitor",
+                  "lik  const     params1    monitor.Y
+                   lik  const     params2    monitor.Y
+                   lik  const     params1    monitor.all
+                   lik  const     params2    monitor.all")
 #> [[1]]
 #> $Y
-#> [1] 0.8231456
+#> [1] -0.9349803
 #> 
 #> $mu
 #> [1] 0
@@ -85,26 +68,26 @@ simcases_simulate(cases = list(sims1, sims2, sims3, sims4))
 #> an nlists object of an nlist object with 2 natomic elements
 #> [[2]]
 #> $Y
-#> [1] -1.943201
-#> 
-#> $Z
-#> [1] 1
-#> 
-#> $mu
-#> [1] 0
-#> 
-#> an nlists object of an nlist object with 3 natomic elements
-#> [[3]]
-#> $Y
-#> [1] 1.563395
+#> [1] 2.048787
 #> 
 #> $mu
 #> [1] 0
 #> 
 #> an nlists object of an nlist object with 2 natomic elements
+#> [[3]]
+#> $Y
+#> [1] 1.258582
+#> 
+#> $Z
+#> [1] 2
+#> 
+#> $mu
+#> [1] 0
+#> 
+#> an nlists object of an nlist object with 3 natomic elements
 #> [[4]]
 #> $Y
-#> [1] 3.338305
+#> [1] 1.557847
 #> 
 #> $Z
 #> [1] 2

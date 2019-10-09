@@ -4,22 +4,24 @@
 \alias{simcases_simulate}
 \title{Simulate Datasets for multiple cases/scenarios}
 \usage{
-simcases_simulate(cases)
+simcases_simulate(header, cases, environment = parent.frame())
 }
 \arguments{
-\item{cases}{A list of cases obtained with smc_set_cases}
+\item{header}{A string to indicate which arguments are used to define cases}
+
+\item{cases}{A string that defines cases in terms of the header. Each row represents a different case. Objects must be defined within the global environment.}
+
+\item{environment}{The environment in which the objects were defined.}
 }
 \description{
 Simulate Datasets for multiple cases/scenarios
 }
 \examples{
 
-code <- "a ~ dnorm(0, 1/sigma^2)"
-case1 <- smc_set_case(fun=sims::sims_simulate, 
-             code = code,
-             constants = nlist(sigma=1))
-case2 <- smc_set_case(fun=sims::sims_simulate, 
-             code = code,
-             constants = nlist(sigma=2))         
-simcases_simulate(cases = list(case1, case2))
+normal <- "a ~ dnorm(0, 1/sigma^2)"
+sigma1 <- nlist(sigma=1)
+sigma2 <- nlist(sigma=2)
+simcases_simulate("code constants",
+                       "normal sigma1
+                        normal sigma2")
 }
