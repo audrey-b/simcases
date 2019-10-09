@@ -9,22 +9,24 @@ Description: Perform Simulation Studies Over Multiple Cases/Scenarios.
 License: GPL-3
 Depends: R (>= 3.6), nlist
 Imports: 
-  err,
-  checkr,
+  chk (>= 0.0.1.9019),
+  sims (>= 0.0.0.9013),
   rjags,
-  mcmcderive,
-  sims,
   batchr,
   magrittr,
   term,
-  utils
+  utils,
+  methods
 Suggests: 
     covr,
-    testthat
+    testthat,
+    future
 Remotes:
    poissonconsulting/nlist,
+   poissonconsulting/chk,
    poissonconsulting/sims,
    poissonconsulting/batchr
+   audrey-b/simanalyse
 URL: https://github.com/audrey-b/simcases
 BugReports: https://github.com/audrey-b/simcases/issues
 Encoding: UTF-8

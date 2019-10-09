@@ -45,61 +45,74 @@ remotes::install_github("audrey-b/simcases")
 ``` r
 library(simcases)
 #> Loading required package: nlist
-#> Registered S3 method overwritten by 'rjags':
-#>   method               from 
-#>   as.mcmc.list.mcarray mcmcr
 code = "Y ~ dnorm(mu, 1/sigma^2)
         Z ~ dpois(lambda)"
-simcases_simulate(code = list(code = code),
-                  constants = list(const = nlist(mu=0)),
-                  parameters = list(params1 = nlist(sigma=1, lambda=1),
-                                    params2 = nlist(sigma=2, lambda=1)),
-                  monitor = list(monitor.Y = "Y", monitor.all = ".*"),
-                  cases = list(sims1 = "code const params1 monitor.Y",
-                               sims2 = "code const params1 monitor.all",
-                               sims3 = "code const params2 monitor.Y",
-                               sims4 = "code const params2 monitor.all"))
+const = nlist(mu=0)
+params1 = nlist(sigma=1, lambda=1)
+params2 = nlist(sigma=2, lambda=1)
+monitor.Y = "Y"
+monitor.all = ".*"
+
+sims1 = smc_set_case(sims::sims_simulate,
+                     code = code,
+                     constants = const,
+                     parameters = params1,
+                     monitor = monitor.Y)
+sims2 = smc_set_case(sims::sims_simulate,
+                     code = code,
+                     constants = const,
+                     parameters = params1,
+                     monitor = monitor.all)
+sims3 = smc_set_case(sims::sims_simulate,
+                     code = code,
+                     constants = const,
+                     parameters = params2,
+                     monitor = monitor.Y)
+sims4 = smc_set_case(sims::sims_simulate,
+                     code = code,
+                     constants = const,
+                     parameters = params2,
+                     monitor = monitor.all)
+
+simcases_simulate(cases = list(sims1, sims2, sims3, sims4))
 #> [[1]]
 #> $Y
-#> [1] 0.01991886
+#> [1] 0.8231456
 #> 
 #> $mu
 #> [1] 0
 #> 
-#> an nlists object of 100 nlist objects each with 2 natomic elements
-#> 
+#> an nlists object of an nlist object with 2 natomic elements
 #> [[2]]
 #> $Y
-#> [1] 0.0436809
+#> [1] -1.943201
 #> 
 #> $Z
-#> [1] 1.21
+#> [1] 1
 #> 
 #> $mu
 #> [1] 0
 #> 
-#> an nlists object of 100 nlist objects each with 3 natomic elements
-#> 
+#> an nlists object of an nlist object with 3 natomic elements
 #> [[3]]
 #> $Y
-#> [1] -0.2279108
+#> [1] 1.563395
 #> 
 #> $mu
 #> [1] 0
 #> 
-#> an nlists object of 100 nlist objects each with 2 natomic elements
-#> 
+#> an nlists object of an nlist object with 2 natomic elements
 #> [[4]]
 #> $Y
-#> [1] -0.1602485
+#> [1] 3.338305
 #> 
 #> $Z
-#> [1] 0.98
+#> [1] 2
 #> 
 #> $mu
 #> [1] 0
 #> 
-#> an nlists object of 100 nlist objects each with 3 natomic elements
+#> an nlists object of an nlist object with 3 natomic elements
 ```
 
 ## Contribution

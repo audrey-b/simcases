@@ -1,3 +1,3 @@
-#' @import nlist err checkr rjags mcmcderive sims batchr magrittr
+#' @import nlist rjags sims batchr magrittr chk
 #' @importFrom utils read.table
 NULL

@@ -11,17 +11,17 @@ Perform Simulation Studies Over Multiple Cases/Scenarios.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/poissonconsulting/simcases}
-  \item Report bugs at \url{https://github.com/poissonconsulting/simcases/issues}
+  \item \url{https://github.com/audrey-b/simcases}
+  \item Report bugs at \url{https://github.com/audrey-b/simcases/issues}
 }
 
 }
 \author{
 \strong{Maintainer}: Audrey Beliveau \email{audrey.beliveau@uwaterloo.ca}
 
-Authors:
+Other contributors:
 \itemize{
-  \item Joe Thorley \email{joe@poissonconsulting.ca} (0000-0002-7683-4592)
+  \item Joe Thorley \email{joe@poissonconsulting.ca} (0000-0002-7683-4592) [contributor]
 }
 
 }
