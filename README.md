@@ -42,6 +42,9 @@ remotes::install_github("audrey-b/simcases")
 
 ## Demonstration
 
+First, define the likelihood, constants, parameters and other
+characteristics of the models to use for the simulations.
+
 ``` r
 library(simcases)
 #> Loading required package: nlist
@@ -52,50 +55,113 @@ params1 = nlist(sigma=1, lambda=1)
 params2 = nlist(sigma=2, lambda=1)
 monitor.Y = "Y"
 monitor.all = ".*"
+```
 
-simcases_simulate("code constants parameters monitor",
-                  "lik  const     params1    monitor.Y
-                   lik  const     params2    monitor.Y
-                   lik  const     params1    monitor.all
-                   lik  const     params2    monitor.all")
+Specify the models to use. The first row is a header and the following
+rows each describe a model.
+
+``` r
+models = "code constants parameters monitor,
+          lik  const     params1    monitor.Y
+          lik  const     params2    monitor.Y
+          lik  const     params1    monitor.all
+          lik  const     params2    monitor.all"
+```
+
+Simulate data. The results are written to files.
+
+``` r
+set.seed(10)
+simcases_simulate(models = models,
+                  nsims = 3,
+                  exists = NA,
+                  ask = FALSE)
 #> [[1]]
-#> $Y
-#> [1] -0.9349803
+#> [1] TRUE
 #> 
-#> $mu
-#> [1] 0
-#> 
-#> an nlists object of an nlist object with 2 natomic elements
 #> [[2]]
-#> $Y
-#> [1] 2.048787
+#> [1] TRUE
 #> 
-#> $mu
-#> [1] 0
-#> 
-#> an nlists object of an nlist object with 2 natomic elements
 #> [[3]]
-#> $Y
-#> [1] 1.258582
+#> [1] TRUE
 #> 
-#> $Z
-#> [1] 2
-#> 
-#> $mu
-#> [1] 0
-#> 
-#> an nlists object of an nlist object with 3 natomic elements
 #> [[4]]
+#> [1] TRUE
+```
+
+Have a look at the files created.
+
+``` r
+files <- list.files(getwd(), recursive=TRUE, all.files=TRUE)
+print(files)
+#>  [1] "case1/sims/.sims.rds"       "case1/sims/data0000001.rds"
+#>  [3] "case1/sims/data0000002.rds" "case1/sims/data0000003.rds"
+#>  [5] "case2/sims/.sims.rds"       "case2/sims/data0000001.rds"
+#>  [7] "case2/sims/data0000002.rds" "case2/sims/data0000003.rds"
+#>  [9] "case3/sims/.sims.rds"       "case3/sims/data0000001.rds"
+#> [11] "case3/sims/data0000002.rds" "case3/sims/data0000003.rds"
+#> [13] "case4/sims/.sims.rds"       "case4/sims/data0000001.rds"
+#> [15] "case4/sims/data0000002.rds" "case4/sims/data0000003.rds"
+```
+
+Load one file.
+
+``` r
+readRDS(file.path(getwd(), files[2]))
 #> $Y
-#> [1] 1.557847
-#> 
-#> $Z
-#> [1] 2
+#> [1] 0.7500481
 #> 
 #> $mu
 #> [1] 0
 #> 
-#> an nlists object of an nlist object with 3 natomic elements
+#> an nlist object with 2 natomic elements
+```
+
+## Additional features
+
+When a large number of models is used, it can be more convenient to
+specify models as data frames to facilitate query and manipulation. The
+example above may be reproduced as follows.
+
+``` r
+models <- tibble::tribble(
+  ~parameters, ~monitor,
+  "params1", "monitor.Y",
+  "params2", "monitor.all"
+  )
+models <- tidyr::expand(models, parameters, monitor)
+models$code <- "lik"
+models$constants <- "const"
+models
+#> # A tibble: 4 x 4
+#>   parameters monitor     code  constants
+#>   <chr>      <chr>       <chr> <chr>    
+#> 1 params1    monitor.all lik   const    
+#> 2 params1    monitor.Y   lik   const    
+#> 3 params2    monitor.all lik   const    
+#> 4 params2    monitor.Y   lik   const
+
+set.seed(10)
+simcases_simulate(models = models,
+                  nsims = 3,
+                  fun = identity,
+                  exists = NA,
+                  ask = FALSE)
+#> Warning: Deleted 3 sims data files in './case1/sims'.
+#> Warning: Deleted 3 sims data files in './case2/sims'.
+#> Warning: Deleted 3 sims data files in './case3/sims'.
+#> Warning: Deleted 3 sims data files in './case4/sims'.
+#> [[1]]
+#> [1] TRUE
+#> 
+#> [[2]]
+#> [1] TRUE
+#> 
+#> [[3]]
+#> [1] TRUE
+#> 
+#> [[4]]
+#> [1] TRUE
 ```
 
 ## Contribution

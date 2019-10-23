@@ -2,6 +2,7 @@
 
 export(function_template)
 export(simcases_simulate)
+export(smc_analyse_bayesian)
 import(batchr)
 import(chk)
 import(magrittr)

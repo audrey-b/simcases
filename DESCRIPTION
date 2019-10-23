@@ -20,7 +20,8 @@ Imports:
 Suggests: 
     covr,
     testthat,
-    future
+    future,
+    tibble
 Remotes:
    poissonconsulting/nlist,
    poissonconsulting/chk,

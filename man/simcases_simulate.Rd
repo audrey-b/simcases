@@ -4,24 +4,44 @@
 \alias{simcases_simulate}
 \title{Simulate Datasets for multiple cases/scenarios}
 \usage{
-simcases_simulate(header, cases, environment = parent.frame())
+simcases_simulate(models = models, cases = NA, path = ".",
+  environment = parent.frame(), fun = function(x) read.table(text =
+  gsub(";|,| |:|\\t|\\\\||&|~", "\\t", readLines(textConnection(x))),
+  header = TRUE), ...)
 }
 \arguments{
-\item{header}{A string to indicate which arguments are used to define cases}
+\item{models}{An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a model using strings. The strings must refer to objects defined within \code{environment}.}
 
-\item{cases}{A string that defines cases in terms of the header. Each row represents a different case. Objects must be defined within the global environment.}
+\item{cases}{An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a case using strings.}
 
-\item{environment}{The environment in which the objects were defined.}
+\item{path}{A string specifying the path to the directory to save the datasets.}
+
+\item{environment}{The environment in which the objects described in \code{cases} were defined.}
+
+\item{fun}{A function to convert \code{cases} to a data frame.}
+
+\item{...}{Other arguments from \code{sims::sims_simulate}}
 }
 \description{
-Simulate Datasets for multiple cases/scenarios
+Simulate Datasets for multiple cases/scenarios. Results are saved to disk.
 }
 \examples{
 
 normal <- "a ~ dnorm(0, 1/sigma^2)"
 sigma1 <- nlist(sigma=1)
 sigma2 <- nlist(sigma=2)
-simcases_simulate("code constants",
-                       "normal sigma1
-                        normal sigma2")
+simcases_simulate("code constants,
+                   normal sigma1
+                   normal sigma2",
+                   path = tempdir(), 
+                   exists = NA, 
+                   ask = FALSE)
+simcases_simulate(tibble::tribble(
+                   ~code, ~constants,
+                   "normal", "sigma1",
+                   "normal", "sigma2"),
+                   fun = identity,
+                   path = tempdir(), 
+                   exists = NA, 
+                   ask = FALSE)
 }

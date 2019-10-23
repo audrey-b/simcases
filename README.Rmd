@@ -12,6 +12,11 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
+
+```{r setup, include = FALSE}
+dir.create(file.path(tempdir(), "sims"))
+knitr::opts_knit$set(root.dir = file.path(tempdir(), "sims"))
+```
 # simcases
 
 <!-- badges: start -->
@@ -40,6 +45,9 @@ remotes::install_github("audrey-b/simcases")
 ```
 
 ## Demonstration
+
+First, define the likelihood, constants, parameters and other characteristics of the models to use for the simulations.
+
 ```{r}
 library(simcases)
 lik = "Y ~ dnorm(mu, 1/sigma^2)
@@ -49,12 +57,62 @@ params1 = nlist(sigma=1, lambda=1)
 params2 = nlist(sigma=2, lambda=1)
 monitor.Y = "Y"
 monitor.all = ".*"
+```
 
-simcases_simulate("code constants parameters monitor",
-                  "lik  const     params1    monitor.Y
-                   lik  const     params2    monitor.Y
-                   lik  const     params1    monitor.all
-                   lik  const     params2    monitor.all")
+Specify the models to use. The first row is a header and the following rows each describe a model.
+
+```{r}
+models = "code constants parameters monitor,
+          lik  const     params1    monitor.Y
+          lik  const     params2    monitor.Y
+          lik  const     params1    monitor.all
+          lik  const     params2    monitor.all"
+```
+
+Simulate data. The results are written to files.
+
+```{r}
+set.seed(10)
+simcases_simulate(models = models,
+                  nsims = 3,
+                  exists = NA,
+                  ask = FALSE)
+```
+
+Have a look at the files created.
+
+```{r}
+files <- list.files(getwd(), recursive=TRUE, all.files=TRUE)
+print(files)
+```
+
+Load one file.
+
+```{r}
+readRDS(file.path(getwd(), files[2]))
+```
+
+## Additional features
+
+When a large number of models is used, it can be more convenient to specify models as data frames to facilitate query and manipulation. The example above may be reproduced as follows.
+
+```{r}
+models <- tibble::tribble(
+  ~parameters, ~monitor,
+  "params1", "monitor.Y",
+  "params2", "monitor.all"
+  )
+models <- tidyr::expand(models, parameters, monitor)
+models$code <- "lik"
+models$constants <- "const"
+models
+
+set.seed(10)
+simcases_simulate(models = models,
+                  nsims = 3,
+                  fun = identity,
+                  exists = NA,
+                  ask = FALSE)
 ```
 
 ## Contribution
