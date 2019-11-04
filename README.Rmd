@@ -50,23 +50,23 @@ First, define the likelihood, constants, parameters and other characteristics of
 
 ```{r}
 library(simcases)
-lik = "Y ~ dnorm(mu, 1/sigma^2)
-        Z ~ dpois(lambda)"
+lik = "for(i in 1:10){
+          a[i] ~ dnorm(mu, 1/sigma^2)}"
 const = nlist(mu=0)
-params1 = nlist(sigma=1, lambda=1)
-params2 = nlist(sigma=2, lambda=1)
-monitor.Y = "Y"
-monitor.all = ".*"
+sigma1 = nlist(sigma=1)
+sigma2 = nlist(sigma=2)
+all = ".*"
+a = "a"
 ```
 
 Specify the models to use. The first row is a header and the following rows each describe a model.
 
 ```{r}
-models = "code constants parameters monitor,
-          lik  const     params1    monitor.Y
-          lik  const     params2    monitor.Y
-          lik  const     params1    monitor.all
-          lik  const     params2    monitor.all"
+models = "code constants parameters monitor
+          lik  const     sigma1     a
+          lik  const     sigma2     a
+          lik  const     sigma1     all
+          lik  const     sigma2     all"
 ```
 
 Simulate data. The results are written to files.
@@ -77,6 +77,24 @@ simcases_simulate(models = models,
                   nsims = 3,
                   exists = NA,
                   ask = FALSE)
+```
+
+Analyse data according to specific cases (scenarios).
+
+```{r}
+prior <- "sigma ~ dunif(0, 6)"
+sigma <- "sigma"
+models_analysis <- "code code.add monitor
+                    lik  prior    sigma
+                    lik  prior    sigma"
+cases <- "sims model
+           1    1
+           2    1
+           3    2
+           4    2"
+smc_analyse_bayesian(models = models_analysis,
+                     cases = cases,
+                     mode = simanalyse::sma_set_mode("debug"))
 ```
 
 Have a look at the files created.
@@ -99,8 +117,8 @@ When a large number of models is used, it can be more convenient to specify mode
 ```{r}
 models <- tibble::tribble(
   ~parameters, ~monitor,
-  "params1", "monitor.Y",
-  "params2", "monitor.all"
+  "sigma1", "a",
+  "sigma2", "all"
   )
 models <- tidyr::expand(models, parameters, monitor)
 models$code <- "lik"

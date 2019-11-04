@@ -25,3 +25,27 @@ smc_analyse_bayesian(models, cases, path = ".",
 \description{
 Analyse Datasets for multiple cases/scenarios using Bayesian methods. Results are saved to disk.
 }
+\examples{
+
+normal <- "a ~ dnorm(0, 1/sigma^2)"
+sigma1 <- nlist(sigma=1)
+sigma2 <- nlist(sigma=2)
+all <- ".*"
+models_sims <- "code   constants
+                normal sigma1
+                normal sigma2"
+simcases_simulate(models = models_sims,
+                  path = tempdir(), 
+                  exists = NA, 
+                  ask = FALSE,
+                  nsims = 2)
+models_analysis <- "code   monitor  
+                    normal all
+                    normal all"
+cases <- "sims model
+          1    1
+          2    2"
+smc_analyse_bayesian(models = models_analysis,
+                     cases = cases,
+                     path = tempdir())
+}

@@ -4,7 +4,7 @@
 #' 
 #@param header A string to indicate which arguments are used to define cases
 #' @param models An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a model using strings. The strings must refer to objects defined within \code{environment}.
-#' @param cases An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a case using strings. 
+# @param cases A vector of models to run based on model names. If NA all models are run.
 #' @param path A string specifying the path to the directory to save the datasets.
 #' @param environment The environment in which the objects described in \code{cases} were defined.
 #' @param fun A function to convert \code{cases} to a data frame.
@@ -37,7 +37,6 @@
 
 
 simcases_simulate <- function(models = models, 
-                              cases = NA,
                               path = ".",
                               environment=parent.frame(), 
                               fun=function(x) read.table(
@@ -45,12 +44,18 @@ simcases_simulate <- function(models = models,
                                           readLines(textConnection(x))),
                                 header=TRUE),
                               ...) {
+  
+  models_list <- list_args(models = models,
+                           environment=environment,
+                           fun=fun)
+  chk_list(models_list)
+  for(model.id in 1:length(models_list)){
+    chk_all(names(models_list[[model.id]]) %in% methods::formalArgs(sims::sims_simulate), 
+            chk_true)
+  }
 
-  apply_to_cases(sma_fun = sims::sims_simulate,
-                 models = models,
-                 cases = cases,
+  apply_sims_to_cases(sma_fun = sims::sims_simulate,
+                 models_list = models_list,
                  path=path,
-                 environment=environment,
-                 fun=fun,
                  ...)
 }

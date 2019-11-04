@@ -15,44 +15,54 @@
 
 #' @export
 #'
-# @examples
-# 
-# normal <- "a ~ dnorm(0, 1/sigma^2)"
-# sigma1 <- nlist(sigma=1)
-# sigma2 <- nlist(sigma=2)
-# models_sims <- "name   code   constants
-#                 sims1  normal sigma1
-#                 sims2  normal sigma2"
-# simcases_simulate(models = models_sims,
-#                   path = tempdir(), 
-#                   exists = NA, 
-#                   ask = FALSE,
-#                   nsims = 2)
-# models_analyse <- "name   code   
-#                    model1 normal
-#                    model2 normal"
-# cases <- "name sims model
-#           case1 sims1 model1
-#           case2 sims2 model2"
-# smc_analyse_bayesian(models = models
-#                      cases = cases,
-#                      path = tempdir())
+#' @examples
+#' 
+#' normal <- "a ~ dnorm(0, 1/sigma^2)"
+#' sigma1 <- nlist(sigma=1)
+#' sigma2 <- nlist(sigma=2)
+#' all <- ".*"
+#' models_sims <- "code   constants
+#'                 normal sigma1
+#'                 normal sigma2"
+#' simcases_simulate(models = models_sims,
+#'                   path = tempdir(), 
+#'                   exists = NA, 
+#'                   ask = FALSE,
+#'                   nsims = 2)
+#' models_analysis <- "code   monitor  
+#'                     normal all
+#'                     normal all"
+#' cases <- "sims model
+#'           1    1
+#'           2    2"
+#' smc_analyse_bayesian(models = models_analysis,
+#'                      cases = cases,
+#'                      path = tempdir())
 
 smc_analyse_bayesian <- function(models,
                                  cases, 
-                              path = ".",
-                              environment=parent.frame(), 
-                              fun=function(x) read.table(
-                                text=gsub(";|,| |:|\t|\\||&|~", "\t", 
-                                          readLines(textConnection(x))),
-                                header=TRUE),
-                              ...) {
-
-  # apply_to_cases(sma_fun = simanalyse::sma_analyse_bayesian,
-  #                models=models,
-  #                cases=cases,
-  #                path=path,
-  #                environment=environment,
-  #                fun=fun,
-  #                ...)
+                                 path = ".",
+                                 environment=parent.frame(), 
+                                 fun=function(x) read.table(
+                                   text=gsub(";|,| |:|\t|\\||&|~", "\t", 
+                                             readLines(textConnection(x))),
+                                   header=TRUE),
+                                 ...) {
+  
+  models_list <- list_args(models = models,
+                           environment=environment,
+                           fun=fun)
+  chk_list(models_list)
+  for(model.id in 1:length(models_list)){
+    chk_all(names(models_list[[model.id]]) %in% methods::formalArgs(simanalyse::sma_analyse_bayesian), 
+            chk_true)
+  }
+  
+  apply_simanalyse_to_cases(sma_fun = simanalyse::sma_analyse_bayesian,
+                            models_list = models_list,
+                            cases=cases,
+                            path=path,
+                            fun=fun,
+                            ...)
+  
 }

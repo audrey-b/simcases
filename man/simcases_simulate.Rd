@@ -4,15 +4,13 @@
 \alias{simcases_simulate}
 \title{Simulate Datasets for multiple cases/scenarios}
 \usage{
-simcases_simulate(models = models, cases = NA, path = ".",
+simcases_simulate(models = models, path = ".",
   environment = parent.frame(), fun = function(x) read.table(text =
   gsub(";|,| |:|\\t|\\\\||&|~", "\\t", readLines(textConnection(x))),
   header = TRUE), ...)
 }
 \arguments{
 \item{models}{An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a model using strings. The strings must refer to objects defined within \code{environment}.}
-
-\item{cases}{An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a case using strings.}
 
 \item{path}{A string specifying the path to the directory to save the datasets.}
 

@@ -16,7 +16,8 @@ Imports:
   magrittr,
   term,
   utils,
-  methods
+  methods,
+  simanalyse
 Suggests: 
     covr,
     testthat,
