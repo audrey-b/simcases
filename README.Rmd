@@ -94,9 +94,19 @@ cases <- "sims model
            4    2"
 smc_analyse(models = models_analysis,
                      cases = cases,
-                     mode = simanalyse::sma_set_mode("debug"))
+                     mode = simanalyse::sma_set_mode("quick"))
 ```
 
+Evaluate the performance of the models across the cases (scenarios)
+
+```{r}
+args = "parameters
+         sigma1
+         sigma1
+         sigma2
+         sigma2"
+smc_evaluate(args, cases, monitor="sigma")
+```
 Have a look at the files created.
 
 ```{r}
@@ -107,7 +117,7 @@ print(files)
 Load one file.
 
 ```{r}
-readRDS(file.path(getwd(), files[2]))
+readRDS(file.path(getwd(), files[9]))
 ```
 
 ## Additional features

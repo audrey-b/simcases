@@ -25,7 +25,7 @@ smc_analyse(
 
 \item{fun}{A function to convert \code{models} and \code{cases} to data frames.}
 
-\item{...}{Other arguments of \code{sims::sims_simulate}}
+\item{...}{Other arguments from \code{simanalyse::sma_analyse}}
 }
 \description{
 Analyse Datasets for multiple cases/scenarios using Bayesian methods. Results are saved to disk.

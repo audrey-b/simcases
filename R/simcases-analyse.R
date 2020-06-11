@@ -11,7 +11,7 @@
 # @param nsims If specified, overwrites n.sims in \code{cases}. A vector of integers specifying the number of data sets to simulate for each case. By default 100 data sets are simulated for each case.
 # @param exists A flag specifying whether the directory should already exist. If \code{exists = NA} it doesn't matter. If the directory already exists it is overwritten if \code{exists = TRUE} or \code{exists = NA} otherwise an error is thrown.
 # @param silent A flag specifying whether to suppress warnings.
-#' @param ... Other arguments of \code{sims::sims_simulate}
+#' @param ... Other arguments from \code{simanalyse::sma_analyse}
 
 #' @export
 #'
@@ -49,7 +49,7 @@ smc_analyse <- function(models,
                                    header=TRUE),
                                  ...) {
   
-  models_list <- list_args(models = models,
+  models_list <- args_to_list(models = models,
                            environment=environment,
                            fun=fun)
   chk_list(models_list)

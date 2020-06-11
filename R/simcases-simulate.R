@@ -20,14 +20,14 @@
 #' normal <- "a ~ dnorm(0, 1/sigma^2)"
 #' sigma1 <- nlist(sigma=1)
 #' sigma2 <- nlist(sigma=2)
-#' smc_simulate("code constants,
+#' smc_simulate("code parameters,
 #'                    normal sigma1
 #'                    normal sigma2",
 #'                    path = tempdir(), 
 #'                    exists = NA, 
 #'                    ask = FALSE)
 #' smc_simulate(tibble::tribble(
-#'                    ~code, ~constants,
+#'                    ~code, ~parameters,
 #'                    "normal", "sigma1",
 #'                    "normal", "sigma2"),
 #'                    fun = identity,
@@ -45,7 +45,7 @@ smc_simulate <- function(models = models,
                                 header=TRUE),
                               ...) {
   
-  models_list <- list_args(models = models,
+  models_list <- args_to_list(models = models,
                            environment=environment,
                            fun=fun)
   chk_list(models_list)

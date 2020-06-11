@@ -2,6 +2,7 @@
 
 export(function_template)
 export(smc_analyse)
+export(smc_evaluate)
 export(smc_simulate)
 import(batchr)
 import(chk)
