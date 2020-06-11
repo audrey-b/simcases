@@ -1,9 +1,6 @@
 language: R
-cache: packages
 
-r:
-  - release
-  - devel
+sudo: required
 
 r_packages:
   - covr
@@ -15,8 +12,9 @@ after_success:
   - Rscript -e 'covr::codecov()'
 
 notifications:
-  email:
-    recipients:
+  email: false
+  slack:
+    rooms:
       - audrey.beliveau@uwaterloo.ca
     on_success: change
     on_failure: always

@@ -1,27 +1,68 @@
-#' Analyse data across multiple case/scenario
+#' Analyse Datasets for multiple cases/scenarios using Bayesian methods
 #'
-#' Analyse data across multiple case/scenario
+#' Analyse Datasets for multiple cases/scenarios using Bayesian methods. Results are saved to disk.
 #' 
-#' @param code A list of strings of JAGS or R code to analyse the data. The code must not be in a data or model block.
-#' @param append A list of strings of JAGS or R code to append at the end of CODE before analysing the data. This is useful for specifying priors seperately from the likelihood in JAGS.
-#' @param sprintf_args A list of list of arguments to pass to sprintf to be applied to the appended code
-#' @param funs A character vector of R functions to analyse the data.
-#' @param args A list of list of arguments to be passed to the functions in funs.
-#' @param monitor  A list of character vectors (or regular expression if a string) specifying the names of the stochastic nodes in code to include in the data. By default all stochastic nodes are included.
-#' @param models A list of strings defining the models.
-#' @param cases A list of strings defining the cases/scenarios to run. Each case is defined by a dataset and a model.
-#' @param path A string specifying the path to the directory to save the data sets in. By default \code{path = NULL } the data sets are not saved but are returned as an nlists object.
-#' @param exists A flag specifying whether the directory should already exist. If \code{exists = NA} it doesn't matter. If the directory already exists it is overwritten if \code{exists = TRUE} or \code{exists = NA} otherwise an error is thrown.
-#' @param silent A flag specifying whether to suppress warnings.
+#@param header A string to indicate which arguments are used to define cases
+#' @param models An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a case using strings. The strings must refer to objects defined within \code{environment}.
+#' @param cases An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a case using strings. The strings must refer to objects defined within \code{environment}.
+#' @param path A string specifying the path to the directory.
+#' @param environment The environment in which the objects described in \code{cases} were defined.
+#' @param fun A function to convert \code{models} and \code{cases} to data frames.
+# @param nsims If specified, overwrites n.sims in \code{cases}. A vector of integers specifying the number of data sets to simulate for each case. By default 100 data sets are simulated for each case.
+# @param exists A flag specifying whether the directory should already exist. If \code{exists = NA} it doesn't matter. If the directory already exists it is overwritten if \code{exists = TRUE} or \code{exists = NA} otherwise an error is thrown.
+# @param silent A flag specifying whether to suppress warnings.
+#' @param ... Other arguments of \code{sims::sims_simulate}
 
-#' @return A flag.
 #' @export
 #'
 #' @examples
-#' smc_analyse()
-#' smc_analyse(FALSE)
-# smc_analyse <- function(x = TRUE) {
-#   check_flag(x)
-#   x
-# }
-# 
+#' 
+#' normal <- "a ~ dnorm(0, 1/sigma^2)"
+#' sigma1 <- nlist(sigma=1)
+#' sigma2 <- nlist(sigma=2)
+#' all <- ".*"
+#' models_sims <- "code   constants
+#'                 normal sigma1
+#'                 normal sigma2"
+#' smc_simulate(models = models_sims,
+#'                   path = tempdir(), 
+#'                   exists = NA, 
+#'                   ask = FALSE,
+#'                   nsims = 2)
+#' models_analysis <- "code   monitor  
+#'                     normal all
+#'                     normal all"
+#' cases <- "sims model
+#'           1    1
+#'           2    2"
+#' smc_analyse(models = models_analysis,
+#'                      cases = cases,
+#'                      path = tempdir())
+
+smc_analyse <- function(models,
+                                 cases, 
+                                 path = ".",
+                                 environment=parent.frame(), 
+                                 fun=function(x) read.table(
+                                   text=gsub(";|,| |:|\t|\\||&|~", "\t", 
+                                             readLines(textConnection(x))),
+                                   header=TRUE),
+                                 ...) {
+  
+  models_list <- list_args(models = models,
+                           environment=environment,
+                           fun=fun)
+  chk_list(models_list)
+  for(model.id in 1:length(models_list)){
+    chk_all(names(models_list[[model.id]]) %in% methods::formalArgs(simanalyse::sma_analyse_bayesian), 
+            chk_true)
+  }
+  
+  apply_simanalyse_to_cases(sma_fun = simanalyse::sma_analyse_bayesian,
+                            models_list = models_list,
+                            cases=cases,
+                            path=path,
+                            fun=fun,
+                            ...)
+  
+}

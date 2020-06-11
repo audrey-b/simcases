@@ -92,7 +92,7 @@ cases <- "sims model
            2    1
            3    2
            4    2"
-smc_analyse_bayesian(models = models_analysis,
+smc_analyse(models = models_analysis,
                      cases = cases,
                      mode = simanalyse::sma_set_mode("debug"))
 ```
