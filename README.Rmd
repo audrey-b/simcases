@@ -73,7 +73,7 @@ Simulate data. The results are written to files.
 
 ```{r}
 set.seed(10)
-simcases_simulate(models = models,
+smc_simulate(models = models,
                   nsims = 3,
                   exists = NA,
                   ask = FALSE)
@@ -126,7 +126,7 @@ models$constants <- "const"
 models
 
 set.seed(10)
-simcases_simulate(models = models,
+smc_simulate(models = models,
                   nsims = 3,
                   fun = identity,
                   exists = NA,

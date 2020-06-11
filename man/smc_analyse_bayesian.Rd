@@ -4,10 +4,15 @@
 \alias{smc_analyse_bayesian}
 \title{Analyse Datasets for multiple cases/scenarios using Bayesian methods}
 \usage{
-smc_analyse_bayesian(models, cases, path = ".",
-  environment = parent.frame(), fun = function(x) read.table(text =
-  gsub(";|,| |:|\\t|\\\\||&|~", "\\t", readLines(textConnection(x))),
-  header = TRUE), ...)
+smc_analyse_bayesian(
+  models,
+  cases,
+  path = ".",
+  environment = parent.frame(),
+  fun = function(x) read.table(text = gsub(";|,| |:|\\t|\\\\||&|~", "\\t",
+    readLines(textConnection(x))), header = TRUE),
+  ...
+)
 }
 \arguments{
 \item{models}{An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a case using strings. The strings must refer to objects defined within \code{environment}.}
@@ -34,7 +39,7 @@ all <- ".*"
 models_sims <- "code   constants
                 normal sigma1
                 normal sigma2"
-simcases_simulate(models = models_sims,
+smc_simulate(models = models_sims,
                   path = tempdir(), 
                   exists = NA, 
                   ask = FALSE,

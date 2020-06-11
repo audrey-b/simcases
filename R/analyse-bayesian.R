@@ -24,7 +24,7 @@
 #' models_sims <- "code   constants
 #'                 normal sigma1
 #'                 normal sigma2"
-#' simcases_simulate(models = models_sims,
+#' smc_simulate(models = models_sims,
 #'                   path = tempdir(), 
 #'                   exists = NA, 
 #'                   ask = FALSE,

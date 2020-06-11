@@ -18,9 +18,9 @@
 #' @export
 #'
 #' @examples
-#' simcases_model()
-#' simcases_model(FALSE)
-# simcases_model <- function(x = TRUE) {
+#' smc_model()
+#' smc_model(FALSE)
+# smc_model <- function(x = TRUE) {
 #   check_flag(x)
 #   x
 # }

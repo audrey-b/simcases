@@ -33,5 +33,5 @@ URL: https://github.com/audrey-b/simcases
 BugReports: https://github.com/audrey-b/simcases/issues
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 Language: en-US

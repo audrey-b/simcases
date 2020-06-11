@@ -14,16 +14,16 @@
 #' @export
 #'
 #' @examples
-#' simcases_derive()
-#' simcases_derive(FALSE)
-# simcases_derive <- function(x = TRUE) {
+#' smc_derive()
+#' smc_derive(FALSE)
+# smc_derive <- function(x = TRUE) {
 #   check_flag(x)
 #   x
 # }
 
 # sims_derive(code = "b <- a + 1", path=...)
 
-# simcases_derive(code = list(code1 = "b <- a + 1",
+# smc_derive(code = list(code1 = "b <- a + 1",
 #                             code2 = "c <- a + 2"),
 #                 cases = list(derived1 = "code1",
 #                              derived2 = "code2),

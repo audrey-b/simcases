@@ -7,13 +7,13 @@ test_that("generates data with replicability",{
   set.seed(10)
   model="a ~ dunif(0,1)"
   nsims1 = 1L
-  simcases_simulate("code nsims
+  smc_simulate("code nsims
                      model nsims1
                      model nsims1",
                     path=tempdir,
                     exists=NA,
                     ask=FALSE)
-  # sims <- simcases_simulate("code nsims
+  # sims <- smc_simulate("code nsims
   #                            model nsims1
   #                            model nsims1")
   # set.seed(10)

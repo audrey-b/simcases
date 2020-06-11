@@ -14,9 +14,9 @@
 #' @export
 #'
 #' @examples
-#' simcases_reanalyse()
-#' simcases_reanalyse(FALSE)
-# simcases_reanalyse <- function(x = TRUE) {
+#' smc_reanalyse()
+#' smc_reanalyse(FALSE)
+# smc_reanalyse <- function(x = TRUE) {
 #   check_flag(x)
 #   x
 # }

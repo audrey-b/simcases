@@ -22,9 +22,9 @@
 #' @export
 #'
 #' @examples
-#' simcases_summarise()
-#' simcases_summarise(FALSE)
-# simcases_summarise <- function(x = TRUE) {
+#' smc_summarise()
+#' smc_summarise(FALSE)
+# smc_summarise <- function(x = TRUE) {
 #   check_flag(x)
 #   x
 # }

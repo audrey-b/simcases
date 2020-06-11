@@ -20,13 +20,13 @@
 #' normal <- "a ~ dnorm(0, 1/sigma^2)"
 #' sigma1 <- nlist(sigma=1)
 #' sigma2 <- nlist(sigma=2)
-#' simcases_simulate("code constants,
+#' smc_simulate("code constants,
 #'                    normal sigma1
 #'                    normal sigma2",
 #'                    path = tempdir(), 
 #'                    exists = NA, 
 #'                    ask = FALSE)
-#' simcases_simulate(tibble::tribble(
+#' smc_simulate(tibble::tribble(
 #'                    ~code, ~constants,
 #'                    "normal", "sigma1",
 #'                    "normal", "sigma2"),
@@ -36,7 +36,7 @@
 #'                    ask = FALSE)
 
 
-simcases_simulate <- function(models = models, 
+smc_simulate <- function(models = models, 
                               path = ".",
                               environment=parent.frame(), 
                               fun=function(x) read.table(
