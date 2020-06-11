@@ -13,8 +13,3 @@ after_success:
 
 notifications:
   email: false
-  slack:
-    rooms:
-      - audrey.beliveau@uwaterloo.ca
-    on_success: change
-    on_failure: always

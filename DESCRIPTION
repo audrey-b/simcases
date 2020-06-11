@@ -7,10 +7,11 @@ Authors@R: c(
     )
 Description: Perform Simulation Studies Over Multiple Cases/Scenarios.
 License: GPL-3
-Depends: R (>= 3.6), nlist
+Depends: R (>= 3.6.0),
+  nlist (>= 0.1.0.9003)
 Imports: 
-  chk (>= 0.0.1.9019),
-  sims (>= 0.0.0.9013),
+  chk,
+  sims,
   rjags,
   batchr,
   magrittr,
