@@ -33,8 +33,8 @@ Analyse Datasets for multiple cases/scenarios using Bayesian methods. Results ar
 \examples{
 
 normal <- "a ~ dnorm(0, 1/sigma^2)"
-sigma1 <- nlist(sigma=1)
-sigma2 <- nlist(sigma=2)
+sigma1 <- list(sigma=1)
+sigma2 <- list(sigma=2)
 all <- ".*"
 models_sims <- "code   constants
                 normal sigma1

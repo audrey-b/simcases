@@ -17,8 +17,8 @@
 #'
 #' @examples
 #' normal <- "a ~ dnorm(0, 1/sigma^2)"
-#' sigma1 <- nlist(sigma=1)
-#' sigma2 <- nlist(sigma=2)
+#' sigma1 <- list(sigma=1)
+#' sigma2 <- list(sigma=2)
 #' models_sims <- "code   parameters
 #'                 normal sigma1
 #'                 normal sigma2"
@@ -59,7 +59,7 @@ args_list <- args_to_list(models = args,
 chk_list(args_list)
 
 for(model.id in 1:length(args_list)){#check that all arguments are from sma_evaluate
-  chk_all(names(args_list[[model.id]]) %in% methods::formalArgs(simanalyse::sma_evaluate), 
+  chk_all(names(args_list[[model.id]]) %in% names(formals(simanalyse::sma_evaluate)), 
           chk_true)
 }
 

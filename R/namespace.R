@@ -1,3 +1,3 @@
-#' @import nlist rjags sims batchr magrittr chk
+#' @import sims chk simanalyse
 #' @importFrom utils read.table
 NULL

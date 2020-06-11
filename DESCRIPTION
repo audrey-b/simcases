@@ -7,23 +7,18 @@ Authors@R: c(
     )
 Description: Perform Simulation Studies Over Multiple Cases/Scenarios.
 License: GPL-3
-Depends: R (>= 3.6.0),
-  nlist (>= 0.1.0.9003)
+Depends: R (>= 3.6.0)
 Imports: 
-  chk,
-  sims,
-  rjags,
-  batchr,
-  magrittr,
-  term,
-  utils,
-  methods,
-  simanalyse
+  chk (>= 0.5.0.9000),
+  sims (>= 0.0.0.9024),
+  simanalyse,
+  utils
 Suggests: 
     covr,
     testthat,
     future,
-    tibble
+    tibble,
+    nlist (>= 0.1.0.9003)
 Remotes:
    poissonconsulting/nlist,
    poissonconsulting/chk,

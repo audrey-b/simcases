@@ -18,8 +18,8 @@
 #' @examples
 #' 
 #' normal <- "a ~ dnorm(0, 1/sigma^2)"
-#' sigma1 <- nlist(sigma=1)
-#' sigma2 <- nlist(sigma=2)
+#' sigma1 <- list(sigma=1)
+#' sigma2 <- list(sigma=2)
 #' smc_simulate("code parameters,
 #'                    normal sigma1
 #'                    normal sigma2",
@@ -50,7 +50,7 @@ smc_simulate <- function(models = models,
                            fun=fun)
   chk_list(models_list)
   for(model.id in 1:length(models_list)){
-    chk_all(names(models_list[[model.id]]) %in% methods::formalArgs(sims::sims_simulate), 
+    chk_all(names(models_list[[model.id]]) %in% names(formals(sims::sims_simulate)), 
             chk_true)
   }
 

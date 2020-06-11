@@ -52,9 +52,9 @@ First, define the likelihood, constants, parameters and other characteristics of
 library(simcases)
 lik = "for(i in 1:10){
           a[i] ~ dnorm(mu, 1/sigma^2)}"
-const = nlist(mu=0)
-sigma1 = nlist(sigma=1)
-sigma2 = nlist(sigma=2)
+const = list(mu=0)
+sigma1 = list(sigma=1)
+sigma2 = list(sigma=2)
 all = ".*"
 a = "a"
 ```

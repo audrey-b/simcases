@@ -38,8 +38,8 @@ R code can be used to customize the performance measures
 }
 \examples{
 normal <- "a ~ dnorm(0, 1/sigma^2)"
-sigma1 <- nlist(sigma=1)
-sigma2 <- nlist(sigma=2)
+sigma1 <- list(sigma=1)
+sigma2 <- list(sigma=2)
 models_sims <- "code   parameters
                 normal sigma1
                 normal sigma2"
