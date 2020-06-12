@@ -11,6 +11,7 @@ smc_analyse(
   environment = parent.frame(),
   fun = function(x) read.table(text = gsub(";|,| |:|\\t|\\\\||&|~", "\\t",
     readLines(textConnection(x))), header = TRUE),
+  mode = simanalyse::sma_set_mode("report"),
   ...
 )
 }
@@ -24,6 +25,8 @@ smc_analyse(
 \item{environment}{The environment in which the objects described in \code{cases} were defined.}
 
 \item{fun}{A function to convert \code{models} and \code{cases} to data frames.}
+
+\item{mode}{test}
 
 \item{...}{Other arguments from \code{simanalyse::sma_analyse}}
 }

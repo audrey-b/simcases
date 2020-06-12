@@ -6,6 +6,7 @@
 #' @param models An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a case using strings. The strings must refer to objects defined within \code{environment}.
 #' @param cases An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a case using strings. The strings must refer to objects defined within \code{environment}.
 #' @param path A string specifying the path to the directory.
+#' @param mode test
 #' @param environment The environment in which the objects described in \code{cases} were defined.
 #' @param fun A function to convert \code{models} and \code{cases} to data frames.
 # @param nsims If specified, overwrites n.sims in \code{cases}. A vector of integers specifying the number of data sets to simulate for each case. By default 100 data sets are simulated for each case.
@@ -47,6 +48,7 @@ smc_analyse <- function(models,
                                    text=gsub(";|,| |:|\t|\\||&|~", "\t", 
                                              readLines(textConnection(x))),
                                    header=TRUE),
+                                  mode = simanalyse::sma_set_mode("report"),
                                  ...) {
   
   models_list <- args_to_list(models = models,
@@ -63,6 +65,7 @@ smc_analyse <- function(models,
                             cases=cases,
                             path=path,
                             fun=fun,
+                            mode=mode,
                             ...)
   
 }
