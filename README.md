@@ -99,7 +99,7 @@ sigma <- "sigma"
 models_analysis <- "code code.add monitor
                     lik  prior    sigma
                     lik  prior    sigma"
-cases <- "sims models
+cases <- "sims analyse
            1    1
            2    1
            3    2

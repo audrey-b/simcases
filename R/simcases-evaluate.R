@@ -32,7 +32,7 @@
 #' models_analysis <- "code    code.add
 #'                     normal  prior1
 #'                     normal  prior2"
-#' cases <- "sims models
+#' cases <- "sims analyse
 #'           1    1
 #'           2    2"
 #' smc_analyse(models = models_analysis,
