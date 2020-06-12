@@ -53,7 +53,7 @@ prior2 = "sigma ~ dunif(0, 5)"
 models_analysis <- "code    code.add
                     normal  prior1
                     normal  prior2"
-cases <- "sims model
+cases <- "sims models
           1    1
           2    2"
 smc_analyse(models = models_analysis,

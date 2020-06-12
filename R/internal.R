@@ -49,7 +49,7 @@ apply_simanalyse_to_cases <- function(sma_fun,
   if(mean(summary(models_list)[,"Mode"] == "list")==1){
     output <- list()
     for(sims.id in cases$sims){
-      for(model.id in cases$model){
+      for(model.id in cases$models){
         newpath = file.path(path, paste0("sims", sims.id))
         if(!dir.exists(newpath)) dir.create(newpath, recursive=TRUE)#shouldn't this be removed?
         do.call(sma_fun, append(models_list[[model.id]], list(path=newpath, ...)))
@@ -70,7 +70,7 @@ apply_evaluate_to_cases <- function(sma_fun,
     output <- list()
     for(i in 1:(length(args)-1)){
     sims.id = cases$sims[i]
-    model.id = cases$model[i]
+    model.id = cases$models[i]
         newpath = file.path(path, paste0("sims", sims.id))
         do.call(sma_fun, append(args[[i]], list(path=newpath, ...)))
     }}else output <- do.call(sma_fun, append(args, list(path=path, ...))) #need to work this line

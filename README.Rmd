@@ -87,7 +87,7 @@ sigma <- "sigma"
 models_analysis <- "code code.add monitor
                     lik  prior    sigma
                     lik  prior    sigma"
-cases <- "sims model
+cases <- "sims models
            1    1
            2    1
            3    2
