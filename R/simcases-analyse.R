@@ -54,11 +54,11 @@ smc_analyse <- function(models,
                            fun=fun)
   chk_list(models_list)
   for(model.id in 1:length(models_list)){
-    chk_all(names(models_list[[model.id]]) %in% names(formals(simanalyse::sma_analyse_bayesian)), 
+    chk_all(names(models_list[[model.id]]) %in% names(formals(simanalyse::sma_analyse)), 
             chk_true)
   }
   
-  apply_simanalyse_to_cases(sma_fun = simanalyse::sma_analyse_bayesian,
+  apply_simanalyse_to_cases(sma_fun = simanalyse::sma_analyse,
                             models_list = models_list,
                             cases=cases,
                             path=path,
