@@ -2,15 +2,16 @@
 #'
 #' Analyse Datasets for multiple cases/scenarios using Bayesian methods. Results are saved to disk.
 #' 
-#@param header A string to indicate which arguments are used to define cases
-#' @param models A data frame or an object that becomes a data frame when \code{fun} is applied. The data frame contains character strings that refer to objects defined within \code{environment}. Each row is a different case/scenario. The header may contain: code, code.add, code.values, monitor, inits, mode and/or deviance.
+#' The arguments \code{code}, \code{code.add}, \code{code.values}, \code{monitor}, \code{inits}, \code{mode} and \code{deviance} will only be used if not specified within \code{models}.
+#' 
+#' @param models A data frame or an object that becomes a data frame when \code{fun} is applied. The data frame contains character strings that refer to objects defined within \code{environment}. Each row defines a model. The header may contain: code, code.add, code.values, monitor, inits, mode and/or deviance.
 #' @param cases A data frame or an object that becomes a data frame when \code{fun} is applied. The header must be "sims analyse" and the data frame contains integers (1,2,3,...) that refer to specific combinations of data and analyses. Each row is a different case/scenario.
-#' @param code A string of code to analyse the data. JAGS code must not be in a data or model block.
+#' @param code A string of code to analyze the data. JAGS code must not be in a data or model block.
 #' @param code.add A string of code to add at the end of \code{code} before analysing the data. This is useful for adding priors to the likelihood.
-#' @param code.values A character vector to replace all instances of "?" in the model. This is useful for varying choices of distributions, e.g. for assessing sensitivity to the choice of priors.
+#' @param code.values A character vector to replace all instances of "?" in the model. To be used only if not specified in \code{models}. This is useful for varying choices of distributions, e.g. for assessing sensitivity to the choice of priors.
 #' @param monitor A character vector (or regular expression if a string) specifying the names of the stochastic nodes to output from the analysis. By default all stochastic nodes are included.
-#' @param inits A list or a function. Initial values for the MCMC chains. If specifying a function, it should either have no arguments, or have a single argument named chain. In the latter case, the supplied function is called with the chain number as argument. In this way, initial values may be generated that depend systematically on the chain number.
-#' @param mode A list obtained from sma_set_mode which sets the parameters of the mcmc sampling.
+#' @param inits A list or a function containing the initial values for the MCMC chains. If specifying a function, it should either have no arguments, or have a single argument named chain. In the latter case, the supplied function is called with the chain number as argument. In this way, initial values may be generated that depend systematically on the chain number.
+#' @param mode A list of mcmc parameters set using [simanalyse::sma_set_mode()].
 #' @param deviance A flag. Indicates whether to monitor deviance for future DIC calculation.
 # @param pD A flag. Indicates whether to monitor pD for future DIC calculation.
 # @param path.save A string specifying the path to the directory to save the results. By default path = NULL the results are not saved but are returned as a list of nlists objects.
@@ -22,8 +23,8 @@
 # @param nsims If specified, overwrites n.sims in \code{cases}. A vector of integers specifying the number of data sets to simulate for each case. By default 100 data sets are simulated for each case.
 # @param exists A flag specifying whether the directory should already exist. If \code{exists = NA} it doesn't matter. If the directory already exists it is overwritten if \code{exists = TRUE} or \code{exists = NA} otherwise an error is thrown.
 # @param silent A flag specifying whether to suppress warnings.
-#' @param ... Other arguments from \code{simanalyse::sma_analyse}
-
+#' @param ... Unused.
+#' @seealso [simanalyse::sma_set_mode()]
 #' @export
 #'
 #' @examples

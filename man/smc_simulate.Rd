@@ -2,11 +2,24 @@
 % Please edit documentation in R/simcases-simulate.R
 \name{smc_simulate}
 \alias{smc_simulate}
-\title{Simulate Datasets for multiple cases/scenarios}
+\title{Simulate data from various models.}
 \usage{
 smc_simulate(
   models = models,
+  code = "",
+  constants = nlist::nlist(),
+  parameters = nlist::nlist(),
+  monitor = ".*",
+  stochastic = TRUE,
+  latent = FALSE,
+  nsims = 1,
   path = ".",
+  exists = FALSE,
+  rdists = sims_rdists(),
+  progress = FALSE,
+  options = furrr::future_options(),
+  ask = getOption("sims.ask", TRUE),
+  silent = FALSE,
   environment = parent.frame(),
   fun = function(x) read.table(text = gsub(";|,| |:|\\t|\\\\||&|~", "\\t",
     readLines(textConnection(x))), header = TRUE),
@@ -14,18 +27,64 @@ smc_simulate(
 )
 }
 \arguments{
-\item{models}{An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a model using strings. The strings must refer to objects defined within \code{environment}.}
+\item{models}{A data frame or an object that becomes a data frame when \code{fun} is applied. 
+The data frame contains character strings that refer to objects defined within \code{environment}. 
+Each row defines a model. 
+The header may contain: code, constants, parameters, monitor, stochastic, latent and/or nsims}
 
-\item{path}{A string specifying the path to the directory to save the datasets.}
+\item{code}{A string of the JAGS or R code to generate the data.
+The JAGS code must not be in a data or model block.}
+
+\item{constants}{An nlist object (or list that can be coerced to nlist)
+specifying the values of nodes in code.
+The values are included in the output dataset.}
+
+\item{parameters}{An nlist object (or list that can be coerced to nlist)
+specifying the values of nodes in code.
+The values are not included in the output dataset.}
+
+\item{monitor}{A character vector (or regular expression if a string)
+specifying the names of the nodes in code to include in the dataset.
+By default all nodes are included.}
+
+\item{stochastic}{A logical scalar specifying whether to monitor
+deterministic and stochastic (NA), only deterministic (FALSE)
+or only stochastic nodes (TRUE).}
+
+\item{latent}{A logical scalar specifying whether to monitor
+observed and latent (NA), only latent (TRUE)
+or only observed nodes (FALSE).}
+
+\item{nsims}{A whole number between 1 and 1,000,000 specifying
+the number of data sets to simulate. By default 100 data sets are simulated.}
+
+\item{path}{A string specifying the path to the directory to save the data sets in.}
+
+\item{exists}{A flag specifying whether the `path` directory should already exist
+(if `exists = NA` it doesn't matter).}
+
+\item{rdists}{A character vector specifying the R functions to recognize as stochastic.}
+
+\item{progress}{A flag specifying whether to print a progress bar.}
+
+\item{options}{The furrr specific options to use with the workers.
+The seed should be specified using [base::set.seed()].}
+
+\item{ask}{A flag specifying whether to ask before deleting sims compatible files.}
+
+\item{silent}{A flag specifying whether to suppress warnings.}
 
 \item{environment}{The environment in which the objects described in \code{cases} were defined.}
 
 \item{fun}{A function to convert \code{cases} to a data frame.}
 
-\item{...}{Other arguments from \code{sims::sims_simulate}}
+\item{...}{Unused.}
 }
 \description{
-Simulate Datasets for multiple cases/scenarios. Results are saved to disk.
+Simulate data from various models. Results are saved to disk.
+}
+\details{
+The arguments \code{code}, \code{constants}, \code{parameters}, \code{monitor}, \code{stochastic}, \code{latent} and \code{nsims} will only be used if not specified within \code{models}.
 }
 \examples{
 
@@ -46,4 +105,7 @@ smc_simulate(tibble::tribble(
                    path = tempdir(), 
                    exists = NA, 
                    ask = FALSE)
+}
+\seealso{
+[sims::simulate()]
 }

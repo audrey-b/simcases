@@ -24,21 +24,21 @@ smc_analyse(
 )
 }
 \arguments{
-\item{models}{A data frame or an object that becomes a data frame when \code{fun} is applied. The data frame contains character strings that refer to objects defined within \code{environment}. Each row is a different case/scenario. The header may contain: code, code.add, code.values, monitor, inits, mode and/or deviance.}
+\item{models}{A data frame or an object that becomes a data frame when \code{fun} is applied. The data frame contains character strings that refer to objects defined within \code{environment}. Each row defines a model. The header may contain: code, code.add, code.values, monitor, inits, mode and/or deviance.}
 
 \item{cases}{A data frame or an object that becomes a data frame when \code{fun} is applied. The header must be "sims analyse" and the data frame contains integers (1,2,3,...) that refer to specific combinations of data and analyses. Each row is a different case/scenario.}
 
-\item{code}{A string of code to analyse the data. JAGS code must not be in a data or model block.}
+\item{code}{A string of code to analyze the data. JAGS code must not be in a data or model block.}
 
 \item{code.add}{A string of code to add at the end of \code{code} before analysing the data. This is useful for adding priors to the likelihood.}
 
-\item{code.values}{A character vector to replace all instances of "?" in the model. This is useful for varying choices of distributions, e.g. for assessing sensitivity to the choice of priors.}
+\item{code.values}{A character vector to replace all instances of "?" in the model. To be used only if not specified in \code{models}. This is useful for varying choices of distributions, e.g. for assessing sensitivity to the choice of priors.}
 
 \item{monitor}{A character vector (or regular expression if a string) specifying the names of the stochastic nodes to output from the analysis. By default all stochastic nodes are included.}
 
-\item{inits}{A list or a function. Initial values for the MCMC chains. If specifying a function, it should either have no arguments, or have a single argument named chain. In the latter case, the supplied function is called with the chain number as argument. In this way, initial values may be generated that depend systematically on the chain number.}
+\item{inits}{A list or a function containing the initial values for the MCMC chains. If specifying a function, it should either have no arguments, or have a single argument named chain. In the latter case, the supplied function is called with the chain number as argument. In this way, initial values may be generated that depend systematically on the chain number.}
 
-\item{mode}{A list obtained from sma_set_mode which sets the parameters of the mcmc sampling.}
+\item{mode}{A list of mcmc parameters obtained from [simanalyse::sma_set_mode()].}
 
 \item{deviance}{A flag. Indicates whether to monitor deviance for future DIC calculation.}
 
@@ -52,10 +52,13 @@ smc_analyse(
 
 \item{fun}{A function to convert \code{models} and \code{cases} to data frames.}
 
-\item{...}{Other arguments from \code{simanalyse::sma_analyse}}
+\item{...}{Unused.}
 }
 \description{
 Analyse Datasets for multiple cases/scenarios using Bayesian methods. Results are saved to disk.
+}
+\details{
+The arguments \code{code}, \code{code.add}, \code{code.values}, \code{monitor}, \code{inits}, \code{mode} and \code{deviance} will only be used if not specified within \code{models}.
 }
 \examples{
 
@@ -80,4 +83,7 @@ cases <- "sims analyse
 smc_analyse(models = models_analysis,
                      cases = cases,
                      path = tempdir())
+}
+\seealso{
+[simanalyse::sma_set_mode()]
 }

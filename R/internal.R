@@ -26,14 +26,14 @@ apply_sims_to_cases <- function(sma_fun,
                                 path = ".",
                                 ...) {
   
-  if(mean(summary(models_list)[,"Mode"] == "list")==1){#all list
+  #if(mean(summary(models_list)[,"Mode"] == "list")==1){#all list
     output <- list()
     for(sims.id in 1:length(models_list)){
       newpath = file.path(path, paste0("sims", sims.id))
-      if(!dir.exists(newpath)) dir.create(newpath, recursive=TRUE)
+      #if(!dir.exists(newpath)) dir.create(newpath, recursive=TRUE)
       output[[sims.id]] <- do.call(sma_fun, append(models_list[[sims.id]], list(save=TRUE, path=newpath, ...)), quote=TRUE)
     }
-  }else output <- do.call(sma_fun, append(models_list, list(save=TRUE, path=path, ...)))
+  #}else output <- do.call(sma_fun, append(models_list, list(save=TRUE, path=path, ...)))
   return(output)
 }
 
