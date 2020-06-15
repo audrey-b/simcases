@@ -7,26 +7,50 @@
 smc_analyse(
   models,
   cases,
+  code = "",
+  code.add = "",
+  code.values = NULL,
+  monitor = ".*",
+  inits = list(),
+  mode = sma_set_mode("report"),
+  deviance = TRUE,
   path = ".",
+  progress = FALSE,
+  options = furrr::future_options(seed = TRUE),
   environment = parent.frame(),
   fun = function(x) read.table(text = gsub(";|,| |:|\\t|\\\\||&|~", "\\t",
     readLines(textConnection(x))), header = TRUE),
-  mode = simanalyse::sma_set_mode("report"),
   ...
 )
 }
 \arguments{
-\item{models}{An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a case using strings. The strings must refer to objects defined within \code{environment}.}
+\item{models}{A data frame or an object that becomes a data frame when \code{fun} is applied. The data frame contains character strings that refer to objects defined within \code{environment}. Each row is a different case/scenario. The header may contain: code, code.add, code.values, monitor, inits, mode and/or deviance.}
 
-\item{cases}{An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a case using strings. The strings must refer to objects defined within \code{environment}.}
+\item{cases}{A data frame or an object that becomes a data frame when \code{fun} is applied. The header must be "sims analyse" and the data frame contains integers (1,2,3,...) that refer to specific combinations of data and analyses. Each row is a different case/scenario.}
+
+\item{code}{A string of code to analyse the data. JAGS code must not be in a data or model block.}
+
+\item{code.add}{A string of code to add at the end of \code{code} before analysing the data. This is useful for adding priors to the likelihood.}
+
+\item{code.values}{A character vector to replace all instances of "?" in the model. This is useful for varying choices of distributions, e.g. for assessing sensitivity to the choice of priors.}
+
+\item{monitor}{A character vector (or regular expression if a string) specifying the names of the stochastic nodes to output from the analysis. By default all stochastic nodes are included.}
+
+\item{inits}{A list or a function. Initial values for the MCMC chains. If specifying a function, it should either have no arguments, or have a single argument named chain. In the latter case, the supplied function is called with the chain number as argument. In this way, initial values may be generated that depend systematically on the chain number.}
+
+\item{mode}{A list obtained from sma_set_mode which sets the parameters of the mcmc sampling.}
+
+\item{deviance}{A flag. Indicates whether to monitor deviance for future DIC calculation.}
 
 \item{path}{A string specifying the path to the directory.}
+
+\item{progress}{A flag specifying whether to print a progress bar.}
+
+\item{options}{The future specific options to use with the workers.}
 
 \item{environment}{The environment in which the objects described in \code{cases} were defined.}
 
 \item{fun}{A function to convert \code{models} and \code{cases} to data frames.}
-
-\item{mode}{test}
 
 \item{...}{Other arguments from \code{simanalyse::sma_analyse}}
 }

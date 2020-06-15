@@ -1,11 +1,11 @@
 context("simcases")
 
 test_that("test",{
-  tempdir <- file.path(tempdir(), "sims")
+  tempdir <- file.path(tempdir(), "simstest")
   unlink(tempdir, recursive = TRUE)
   dir.create(tempdir)
   set.seed(10)
-  param <- list(mu = 0)
+  param <- list(mu = 0.5)
   model="a ~ dunif(mu,1)"
   nsims1 = 1L
   smc_simulate("code parameters nsims
