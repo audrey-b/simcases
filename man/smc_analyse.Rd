@@ -38,7 +38,7 @@ smc_analyse(
 
 \item{inits}{A list or a function containing the initial values for the MCMC chains. If specifying a function, it should either have no arguments, or have a single argument named chain. In the latter case, the supplied function is called with the chain number as argument. In this way, initial values may be generated that depend systematically on the chain number.}
 
-\item{mode}{A list of mcmc parameters obtained from [simanalyse::sma_set_mode()].}
+\item{mode}{A list of mcmc parameters set using [simanalyse::sma_set_mode()].}
 
 \item{deviance}{A flag. Indicates whether to monitor deviance for future DIC calculation.}
 

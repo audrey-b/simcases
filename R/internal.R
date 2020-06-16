@@ -70,7 +70,7 @@ apply_evaluate_to_cases <- function(sma_fun,
   
   #if(mean(summary(args)[,"Mode"] == "list")==1){
     output <- list()
-    for(i in 1:(length(args)-1)){
+    for(i in 1:nrow(cases)){
     sims.id = cases$sims[i]
     model.id = cases$analyse[i]
         newpath = file.path(path, paste0("sims", sims.id))
