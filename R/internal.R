@@ -43,7 +43,7 @@ apply_simanalyse_to_cases <- function(sma_fun,
                                       path = ".",
                                       fun = fun) {
   
-  cases <- fun(cases)
+  if(!is.data.frame(cases)) cases <- fun(cases)
   
   #if(mean(summary(models_list)[,"Mode"] == "list")==1){
     
@@ -60,21 +60,20 @@ apply_simanalyse_to_cases <- function(sma_fun,
 }
 
 apply_evaluate_to_cases <- function(sma_fun,
-                                    args,
+                                    setup,
                                       cases,
                                       path = ".",
-                                      fun = fun,
-                                      ...) {
+                                      fun = fun) {
   
-  cases <- fun(cases)
+  if(!is.data.frame(cases)) cases <- fun(cases)
   
-  #if(mean(summary(args)[,"Mode"] == "list")==1){
+  #if(mean(summary(setup)[,"Mode"] == "list")==1){
     output <- list()
     for(i in 1:nrow(cases)){
     sims.id = cases$sims[i]
     model.id = cases$analyse[i]
         newpath = file.path(path, paste0("sims", sims.id))
-        do.call(sma_fun, append(args[[i]], list(analysis=sprintf("analysis%07d", model.id), path=newpath, ...)), quote=TRUE)
-    }#}else output <- do.call(sma_fun, append(args, list(path=path, ...))) #need to work this line
+        do.call(sma_fun, append(setup[[i]], list(analysis=sprintf("analysis%07d", model.id), path=newpath)), quote=TRUE)
+    }#}else output <- do.call(sma_fun, append(setup, list(path=path, ...))) #need to work this line
       return(output)
 }

@@ -5,9 +5,19 @@
 \title{Calculates measures to evaluate the performance of the model}
 \usage{
 smc_evaluate(
-  args,
+  setup,
   cases,
+  measures = c("bias", "mse", "cpQuantile"),
+  estimator = mean,
+  alpha = 0.05,
+  parameters = NULL,
+  monitor = ".*",
+  custom_funs = list(),
+  custom_expr_before = "",
+  custom_expr_after = "",
   path = ".",
+  progress = FALSE,
+  options = furrr::future_options(),
   environment = parent.frame(),
   fun = function(x) read.table(text = gsub(";|,| |:|\\t|\\\\||&|~", "\\t",
     readLines(textConnection(x))), header = TRUE),
@@ -15,17 +25,41 @@ smc_evaluate(
 )
 }
 \arguments{
-\item{args}{An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines parameters to pass to \code{simanalyse::sma_evaluate} for each \code{case} using strings. The strings must refer to objects defined within \code{environment}.}
+\item{setup}{An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines parameters to pass to \code{simanalyse::sma_evaluate} for each \code{case} using strings. The strings must refer to objects defined within \code{environment}.}
 
 \item{cases}{An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a case using strings. The strings must refer to objects defined within \code{environment}.}
 
+\item{measures}{A vector of strings indicating which performance measures to calculate. Strings may include "bias", "E" (expectation), 
+"cpQuantile" (coverage probability of quantile-based CrIs of level \code{alpha}), "LQuantile" (length of quantile-based CrIs of level \code{alpha}),
+"Epvar" (expected posterior variance), "Epsd" (expected posterior standard deviation), "rb" (relative 
+ bias), "br" (bias ratio), "var" (variance), "se" (standard error), "mse" (root mean square error), "rmse" (root mean square error), 
+ "rrmse" (relative root mean square error), "cv" (coefficient of variation), "all" (all the measures)}
+
+\item{estimator}{A function, typically mean or median, for the Bayes estimator to use to calculate the performance measures.}
+
+\item{alpha}{Scalar representing the alpha level used to construct credible intervals. Default is 0.05.}
+
+\item{parameters}{An nlist object (or list that can be coerced to nlist). True values of parameters to be used to calculate the performance measures.}
+
+\item{monitor}{A character vector (or regular expression if a string) specifying the names of the stochastic nodes in code to include in the summary. By default all stochastic nodes are included.}
+
+\item{custom_funs}{A named list of functions to calculate over the mcmc samples. E.g. list(posteriormedian = median).}
+
+\item{custom_expr_before}{A string of R code to derive custom measures. This code is used BEFORE averaging over all simulations. E.g. "mse = (posteriormedian - parameters)^2". Functions from \code{custom_funs} may be used as well as the keywords 'parameters' (the true values of the parameters) and 'estimator' (the estimator defined in \code{estimator}).}
+
+\item{custom_expr_after}{A string of R code to derive additional custom measures. This code is used AFTER averaging over all simulations. E.g. "rmse = sqrt(mse)". Measures calculated from \code{custom_expr_before} may be used as well as the keyword 'parameters' (the true values of the parameters).}
+
 \item{path}{A string specifying the path to the directory.}
+
+\item{progress}{A flag specifying whether to print a progress bar.}
+
+\item{options}{The future specific options to use with the workers.}
 
 \item{environment}{The environment in which the objects described in \code{cases} were defined.}
 
 \item{fun}{A function to convert \code{models} and \code{cases} to data frames. Default is a function that converts a string to a data frame.}
 
-\item{...}{Other arguments from \code{simanalyse::sma_evaluate}}
+\item{...}{Unused}
 }
 \value{
 A flag.

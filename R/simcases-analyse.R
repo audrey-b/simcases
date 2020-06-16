@@ -69,11 +69,12 @@ smc_analyse <- function(models,
                                     readLines(textConnection(x))),
                           header=TRUE),           ...) {
   
-  if(is.data.frame(models)) fun = identity
+  if(is.data.frame(models)){ fun2 = identity
+  }else fun2 = fun
 
     models_list <- args_to_list(models = models,
                               environment=environment,
-                              fun=fun)
+                              fun=fun2)
   chk_list(models_list)
   for(model.id in 1:length(models_list)){
     chk_all(names(models_list[[model.id]]) %in% names(formals(simanalyse::sma_analyse)), 
