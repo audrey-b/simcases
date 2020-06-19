@@ -65,8 +65,6 @@ apply_evaluate_to_cases <- function(sma_fun,
                                       path = ".",
                                       fun = fun) {
   
-  if(!is.data.frame(cases)) cases <- fun(cases)
-  
   #if(mean(summary(setup)[,"Mode"] == "list")==1){
     output <- list()
     for(i in 1:nrow(cases)){

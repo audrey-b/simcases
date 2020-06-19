@@ -100,12 +100,7 @@ smc_analyse(models = models_analysis,
 Evaluate the performance of the models across the cases (scenarios)
 
 ```{r}
-args = "parameters
-         sigma1
-         sigma1
-         sigma2
-         sigma2"
-smc_evaluate(args, cases, monitor="sigma")
+smc_evaluate(cases, monitor="sigma")
 ```
 Have a look at the files created.
 
@@ -117,7 +112,7 @@ print(files)
 Load one file.
 
 ```{r}
-readRDS(file.path(getwd(), files[9]))
+readRDS(file.path(getwd(), files[3]))
 ```
 
 ## Additional features

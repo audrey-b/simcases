@@ -137,9 +137,47 @@ smc_analyse(models = models_analysis,
 #>    Total graph size: 18
 #> 
 #> Initializing model
+#> v data0000001.rds [00:00:00.037]
+#> v data0000002.rds [00:00:00.032]
+#> v data0000003.rds [00:00:00.037]
+#> Success: 3
+#> Failure: 0
+#> Remaining: 0
+#> 
+#> Module dic unloaded
+#> module dic loaded
+#> Compiling model graph
+#>    Resolving undeclared variables
+#>    Allocating nodes
+#> Graph information:
+#>    Observed stochastic nodes: 10
+#>    Unobserved stochastic nodes: 1
+#>    Total graph size: 18
+#> 
+#> Initializing model
+#> 
+#> Compiling model graph
+#>    Resolving undeclared variables
+#>    Allocating nodes
+#> Graph information:
+#>    Observed stochastic nodes: 10
+#>    Unobserved stochastic nodes: 1
+#>    Total graph size: 18
+#> 
+#> Initializing model
+#> 
+#> Compiling model graph
+#>    Resolving undeclared variables
+#>    Allocating nodes
+#> Graph information:
+#>    Observed stochastic nodes: 10
+#>    Unobserved stochastic nodes: 1
+#>    Total graph size: 18
+#> 
+#> Initializing model
 #> v data0000001.rds [00:00:00.032]
-#> v data0000002.rds [00:00:00.018]
-#> v data0000003.rds [00:00:00.016]
+#> v data0000002.rds [00:00:00.037]
+#> v data0000003.rds [00:00:00.052]
 #> Success: 3
 #> Failure: 0
 #> Remaining: 0
@@ -175,9 +213,9 @@ smc_analyse(models = models_analysis,
 #>    Total graph size: 18
 #> 
 #> Initializing model
-#> v data0000001.rds [00:00:00.052]
-#> v data0000002.rds [00:00:00.038]
-#> v data0000003.rds [00:00:00.046]
+#> v data0000001.rds [00:00:00.036]
+#> v data0000002.rds [00:00:00.041]
+#> v data0000003.rds [00:00:00.040]
 #> Success: 3
 #> Failure: 0
 #> Remaining: 0
@@ -213,47 +251,9 @@ smc_analyse(models = models_analysis,
 #>    Total graph size: 18
 #> 
 #> Initializing model
-#> v data0000001.rds [00:00:00.025]
-#> v data0000002.rds [00:00:00.034]
-#> v data0000003.rds [00:00:00.030]
-#> Success: 3
-#> Failure: 0
-#> Remaining: 0
-#> 
-#> Module dic unloaded
-#> module dic loaded
-#> Compiling model graph
-#>    Resolving undeclared variables
-#>    Allocating nodes
-#> Graph information:
-#>    Observed stochastic nodes: 10
-#>    Unobserved stochastic nodes: 1
-#>    Total graph size: 18
-#> 
-#> Initializing model
-#> 
-#> Compiling model graph
-#>    Resolving undeclared variables
-#>    Allocating nodes
-#> Graph information:
-#>    Observed stochastic nodes: 10
-#>    Unobserved stochastic nodes: 1
-#>    Total graph size: 18
-#> 
-#> Initializing model
-#> 
-#> Compiling model graph
-#>    Resolving undeclared variables
-#>    Allocating nodes
-#> Graph information:
-#>    Observed stochastic nodes: 10
-#>    Unobserved stochastic nodes: 1
-#>    Total graph size: 18
-#> 
-#> Initializing model
-#> v data0000001.rds [00:00:00.007]
-#> v data0000002.rds [00:00:00.016]
-#> v data0000003.rds [00:00:00.027]
+#> v data0000001.rds [00:00:00.021]
+#> v data0000002.rds [00:00:00.033]
+#> v data0000003.rds [00:00:00.037]
 #> Success: 3
 #> Failure: 0
 #> Remaining: 0
@@ -265,12 +265,7 @@ smc_analyse(models = models_analysis,
 Evaluate the performance of the models across the cases (scenarios)
 
 ``` r
-args = "parameters
-         sigma1
-         sigma1
-         sigma2
-         sigma2"
-smc_evaluate(args, cases, monitor="sigma")
+smc_evaluate(cases, monitor="sigma")
 #> list()
 ```
 
@@ -320,15 +315,9 @@ print(files)
 Load one file.
 
 ``` r
-readRDS(file.path(getwd(), files[9]))
-#> $a
-#>  [1]  0.64747827  0.28692120  0.03801421  2.05588262  0.07137296 -0.26884657
-#>  [7]  1.29042586 -0.86780175 -0.66888607  2.00855775
-#> 
-#> $mu
-#> [1] 0
-#> 
-#> an nlist object with 2 numeric elements
+readRDS(file.path(getwd(), files[3]))
+#>    term        bias        mse cpQuantile
+#> 1 sigma -0.06750882 0.02581112  0.6666667
 ```
 
 ## Additional features

@@ -5,8 +5,8 @@
 \title{Calculates measures to evaluate the performance of the model}
 \usage{
 smc_evaluate(
-  setup,
   cases,
+  setup = NULL,
   measures = c("bias", "mse", "cpQuantile"),
   estimator = mean,
   alpha = 0.05,
@@ -25,9 +25,11 @@ smc_evaluate(
 )
 }
 \arguments{
-\item{setup}{An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines parameters to pass to \code{simanalyse::sma_evaluate} for each \code{case} using strings. The strings must refer to objects defined within \code{environment}.}
-
 \item{cases}{An object that becomes a data frame when \code{fun} is applied. The first row of the data frame is a header and each subsequent row defines a case using strings. The strings must refer to objects defined within \code{environment}.}
+
+\item{setup}{An object that becomes a data frame when \code{fun} is applied. 
+The first row of the data frame is a header and each subsequent row defines parameters to pass to \code{simanalyse::sma_evaluate} for each \code{case} using strings. 
+The strings must refer to objects defined within \code{environment}.}
 
 \item{measures}{A vector of strings indicating which performance measures to calculate. Strings may include "bias", "E" (expectation), 
 "cpQuantile" (coverage probability of quantile-based CrIs of level \code{alpha}), "LQuantile" (length of quantile-based CrIs of level \code{alpha}),
@@ -39,15 +41,21 @@ smc_evaluate(
 
 \item{alpha}{Scalar representing the alpha level used to construct credible intervals. Default is 0.05.}
 
-\item{parameters}{An nlist object (or list that can be coerced to nlist). True values of parameters to be used to calculate the performance measures.}
+\item{parameters}{An nlist object (or list that can be coerced to nlist). 
+True values of parameters to be used to calculate the performance measures.}
 
 \item{monitor}{A character vector (or regular expression if a string) specifying the names of the stochastic nodes in code to include in the summary. By default all stochastic nodes are included.}
 
 \item{custom_funs}{A named list of functions to calculate over the mcmc samples. E.g. list(posteriormedian = median).}
 
-\item{custom_expr_before}{A string of R code to derive custom measures. This code is used BEFORE averaging over all simulations. E.g. "mse = (posteriormedian - parameters)^2". Functions from \code{custom_funs} may be used as well as the keywords 'parameters' (the true values of the parameters) and 'estimator' (the estimator defined in \code{estimator}).}
+\item{custom_expr_before}{A string of R code to derive custom measures. 
+This code is used BEFORE averaging over all simulations. 
+E.g. "mse = (posteriormedian - parameters)^2". 
+Functions from \code{custom_funs} may be used as well as the keywords 'parameters' (the true values of the parameters) and 'estimator' (the estimator defined in \code{estimator}).}
 
-\item{custom_expr_after}{A string of R code to derive additional custom measures. This code is used AFTER averaging over all simulations. E.g. "rmse = sqrt(mse)". Measures calculated from \code{custom_expr_before} may be used as well as the keyword 'parameters' (the true values of the parameters).}
+\item{custom_expr_after}{A string of R code to derive additional custom measures. 
+This code is used AFTER averaging over all simulations. E.g. "rmse = sqrt(mse)". 
+Measures calculated from \code{custom_expr_before} may be used as well as the keyword 'parameters' (the true values of the parameters).}
 
 \item{path}{A string specifying the path to the directory.}
 
@@ -93,8 +101,8 @@ cases <- "sims analyse
 smc_analyse(models = models_analysis,
                      cases = cases,
                      path = tempdir())
-args = "parameters
-        sigma1
-        sigma2"
-smc_evaluate(args, cases, path = tempdir(), monitor="sigma")
+setup = "parameters
+         sigma1
+         sigma2"
+smc_evaluate(cases, setup, path = tempdir(), monitor="sigma")
 }
