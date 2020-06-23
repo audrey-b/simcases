@@ -137,9 +137,47 @@ smc_analyse(models = models_analysis,
 #>    Total graph size: 18
 #> 
 #> Initializing model
-#> v data0000001.rds [00:00:00.042]
+#> v data0000001.rds [00:00:00.036]
+#> v data0000002.rds [00:00:00.025]
+#> v data0000003.rds [00:00:00.029]
+#> Success: 3
+#> Failure: 0
+#> Remaining: 0
+#> 
+#> Module dic unloaded
+#> module dic loaded
+#> Compiling model graph
+#>    Resolving undeclared variables
+#>    Allocating nodes
+#> Graph information:
+#>    Observed stochastic nodes: 10
+#>    Unobserved stochastic nodes: 1
+#>    Total graph size: 18
+#> 
+#> Initializing model
+#> 
+#> Compiling model graph
+#>    Resolving undeclared variables
+#>    Allocating nodes
+#> Graph information:
+#>    Observed stochastic nodes: 10
+#>    Unobserved stochastic nodes: 1
+#>    Total graph size: 18
+#> 
+#> Initializing model
+#> 
+#> Compiling model graph
+#>    Resolving undeclared variables
+#>    Allocating nodes
+#> Graph information:
+#>    Observed stochastic nodes: 10
+#>    Unobserved stochastic nodes: 1
+#>    Total graph size: 18
+#> 
+#> Initializing model
+#> v data0000001.rds [00:00:00.026]
 #> v data0000002.rds [00:00:00.023]
-#> v data0000003.rds [00:00:00.020]
+#> v data0000003.rds [00:00:00.030]
 #> Success: 3
 #> Failure: 0
 #> Remaining: 0
@@ -175,47 +213,9 @@ smc_analyse(models = models_analysis,
 #>    Total graph size: 18
 #> 
 #> Initializing model
-#> v data0000001.rds [00:00:00.019]
-#> v data0000002.rds [00:00:00.024]
-#> v data0000003.rds [00:00:00.020]
-#> Success: 3
-#> Failure: 0
-#> Remaining: 0
-#> 
-#> Module dic unloaded
-#> module dic loaded
-#> Compiling model graph
-#>    Resolving undeclared variables
-#>    Allocating nodes
-#> Graph information:
-#>    Observed stochastic nodes: 10
-#>    Unobserved stochastic nodes: 1
-#>    Total graph size: 18
-#> 
-#> Initializing model
-#> 
-#> Compiling model graph
-#>    Resolving undeclared variables
-#>    Allocating nodes
-#> Graph information:
-#>    Observed stochastic nodes: 10
-#>    Unobserved stochastic nodes: 1
-#>    Total graph size: 18
-#> 
-#> Initializing model
-#> 
-#> Compiling model graph
-#>    Resolving undeclared variables
-#>    Allocating nodes
-#> Graph information:
-#>    Observed stochastic nodes: 10
-#>    Unobserved stochastic nodes: 1
-#>    Total graph size: 18
-#> 
-#> Initializing model
-#> v data0000001.rds [00:00:00.020]
-#> v data0000002.rds [00:00:00.018]
-#> v data0000003.rds [00:00:00.022]
+#> v data0000001.rds [00:00:00.024]
+#> v data0000002.rds [00:00:00.027]
+#> v data0000003.rds [00:00:00.024]
 #> Success: 3
 #> Failure: 0
 #> Remaining: 0
@@ -252,8 +252,8 @@ smc_analyse(models = models_analysis,
 #> 
 #> Initializing model
 #> v data0000001.rds [00:00:00.020]
-#> v data0000002.rds [00:00:00.030]
-#> v data0000003.rds [00:00:00.023]
+#> v data0000002.rds [00:00:00.025]
+#> v data0000003.rds [00:00:00.058]
 #> Success: 3
 #> Failure: 0
 #> Remaining: 0
