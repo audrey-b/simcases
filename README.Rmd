@@ -22,7 +22,7 @@ knitr::opts_knit$set(root.dir = file.path(tempdir(), "sims"))
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis build Status](https://www.travis-ci.com/audrey-b/simcases.svg?token=LCuTqqVUfUECxm1xTQLb&branch=master)](https://www.travis-ci.com/audrey-b/simcases)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/r36uoa15oab7fofd/branch/master?svg=true)](https://ci.appveyor.com/project/audrey-b/simcases/branch/master)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/51yh2k5lkd9h7ey3/branch/master?svg=true)](https://ci.appveyor.com/project/audrey-b/simcases/branch/master)
 [![Codecov test coverage](https://codecov.io/gh/audrey-b/simcases/branch/master/graph/badge.svg)](https://codecov.io/gh/audrey-b/simcases?branch=master)
 [![License: GPL3](https://img.shields.io/badge/License-GPL3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![CRAN status](https://www.r-pkg.org/badges/version/simcases)](https://cran.r-project.org/package=simcases)

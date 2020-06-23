@@ -10,7 +10,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![Travis build
 Status](https://www.travis-ci.com/audrey-b/simcases.svg?token=LCuTqqVUfUECxm1xTQLb&branch=master)](https://www.travis-ci.com/audrey-b/simcases)
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/r36uoa15oab7fofd/branch/master?svg=true)](https://ci.appveyor.com/project/audrey-b/simcases/branch/master)
+status](https://ci.appveyor.com/api/projects/status/51yh2k5lkd9h7ey3/branch/master?svg=true)](https://ci.appveyor.com/project/audrey-b/simcases/branch/master)
 [![Codecov test
 coverage](https://codecov.io/gh/audrey-b/simcases/branch/master/graph/badge.svg)](https://codecov.io/gh/audrey-b/simcases?branch=master)
 [![License:
@@ -137,8 +137,8 @@ smc_analyse(models = models_analysis,
 #>    Total graph size: 18
 #> 
 #> Initializing model
-#> v data0000001.rds [00:00:00.036]
-#> v data0000002.rds [00:00:00.025]
+#> v data0000001.rds [00:00:00.023]
+#> v data0000002.rds [00:00:00.021]
 #> v data0000003.rds [00:00:00.029]
 #> Success: 3
 #> Failure: 0
@@ -175,9 +175,9 @@ smc_analyse(models = models_analysis,
 #>    Total graph size: 18
 #> 
 #> Initializing model
-#> v data0000001.rds [00:00:00.026]
-#> v data0000002.rds [00:00:00.023]
-#> v data0000003.rds [00:00:00.030]
+#> v data0000001.rds [00:00:00.013]
+#> v data0000002.rds [00:00:00.012]
+#> v data0000003.rds [00:00:00.019]
 #> Success: 3
 #> Failure: 0
 #> Remaining: 0
@@ -213,9 +213,9 @@ smc_analyse(models = models_analysis,
 #>    Total graph size: 18
 #> 
 #> Initializing model
-#> v data0000001.rds [00:00:00.024]
-#> v data0000002.rds [00:00:00.027]
-#> v data0000003.rds [00:00:00.024]
+#> v data0000001.rds [00:00:00.028]
+#> v data0000002.rds [00:00:00.013]
+#> v data0000003.rds [00:00:00.012]
 #> Success: 3
 #> Failure: 0
 #> Remaining: 0
@@ -251,9 +251,9 @@ smc_analyse(models = models_analysis,
 #>    Total graph size: 18
 #> 
 #> Initializing model
-#> v data0000001.rds [00:00:00.020]
-#> v data0000002.rds [00:00:00.025]
-#> v data0000003.rds [00:00:00.058]
+#> v data0000001.rds [00:00:00.022]
+#> v data0000002.rds [00:00:00.014]
+#> v data0000003.rds [00:00:00.014]
 #> Success: 3
 #> Failure: 0
 #> Remaining: 0
