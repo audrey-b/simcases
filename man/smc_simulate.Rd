@@ -16,8 +16,6 @@ smc_simulate(
   path = ".",
   exists = FALSE,
   rdists = sims_rdists(),
-  progress = FALSE,
-  options = furrr::future_options(),
   ask = getOption("sims.ask", TRUE),
   silent = FALSE,
   environment = parent.frame(),
@@ -63,11 +61,7 @@ the number of data sets to simulate. By default 100 data sets are simulated.}
 \item{exists}{A flag specifying whether the `path` directory should already exist
 (if `exists = NA` it doesn't matter).}
 
-\item{rdists}{A character vector specifying the R functions to recognize as stochastic.}
-
-\item{progress}{A flag specifying whether to print a progress bar.}
-
-\item{options}{The furrr specific options to use with the workers.
+\item{rdists}{A character vector specifying the R functions to recognize as stochastic.
 The seed should be specified using [base::set.seed()].}
 
 \item{ask}{A flag specifying whether to ask before deleting sims compatible files.}

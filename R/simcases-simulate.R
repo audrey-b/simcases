@@ -31,8 +31,6 @@
 #' @param exists A flag specifying whether the `path` directory should already exist
 #' (if `exists = NA` it doesn't matter).
 #' @param rdists A character vector specifying the R functions to recognize as stochastic.
-#' @param progress A flag specifying whether to print a progress bar.
-#' @param options The furrr specific options to use with the workers.
 #' The seed should be specified using [base::set.seed()].
 #' @param ask A flag specifying whether to ask before deleting sims compatible files.
 #' @param silent A flag specifying whether to suppress warnings.
@@ -78,8 +76,6 @@ smc_simulate <- function(models = models,
                          path = ".",
                          exists = FALSE,
                          rdists = sims_rdists(),
-                         progress = FALSE,
-                         options = furrr::future_options(),
                          ask = getOption("sims.ask", TRUE),
                          silent = FALSE,
                          environment=parent.frame(), 
@@ -101,7 +97,7 @@ smc_simulate <- function(models = models,
   
   args.global <- list(code=code, constants=constants, parameters=parameters, monitor=monitor, 
                       stochastic=stochastic, latent=latent, nsims=nsims, exists=exists, 
-                      rdists=rdists, progress=progress, options=options, ask=ask, silent=silent)
+                      rdists=rdists, ask=ask, silent=silent)
   args.global <- args.global[setdiff(names(args.global), names(models_list[[1]]))]
   models_list <- lapply(models_list, append, values=args.global)
   
