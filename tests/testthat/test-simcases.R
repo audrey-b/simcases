@@ -56,6 +56,8 @@ cases <- "sims analyse
 set.seed(20200624)
 
 smc_simulate(models = models_simulate,
+             stochastic=TRUE,
+             latent=FALSE,
              nsims = 2,                  #number of datasets per setup
              exists = NA,                  #allow to overwrite directory
              ask = FALSE,

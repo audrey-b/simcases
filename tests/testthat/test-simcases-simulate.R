@@ -12,6 +12,8 @@ test_that("test",{
                 model param nsims1
                 model param nsims1",
                     path=tempdir,
+                    stochastic=TRUE,
+                    latent=FALSE,
                     exists=NA,
                     ask=FALSE)
   prior <- "mu ~ dunif(0,1)"
